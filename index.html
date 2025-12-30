@@ -1,23 +1,585 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+    <!-- Schema Markup (JSON-LD) for enhanced search results snippet -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "MovingCompany",
+        "name": "양주시 포장이사 전문 서비스",
+        "url": "https://example.com/yangju-moving",
+        "description": "양주시 전 지역을 대상으로 2026년 최신 이사 서비스를 제공합니다. 고객 만족도 높은 전문 포장 및 운반 서비스.",
+        "logo": "https://example.com/images/logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+82-10-1234-5678",
+            "contactType": "customer service",
+            "areaServed": "KR",
+            "availableLanguage": "Korean"
+        },
+        "areaServed": [
+            { "@type": "AdministrativeArea", "name": "양주시", "postalCode": "11400" },
+            { "@type": "AdministrativeArea", "name": "옥정동" },
+            { "@type": "AdministrativeArea", "name": "고읍동" },
+            { "@type": "AdministrativeArea", "name": "백석읍" },
+            { "@type": "AdministrativeArea", "name": "광적면" },
+            { "@type": "AdministrativeArea", "name": "장흥면" }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "120"
+        }
+    }
+    </script>
+
+    <style>
+        /*
+        [디자인 컨셉: 부드러운 색감, 명확한 시각적 계층 구조]
+        - 주조색(Primary Color): 차분한 파란색 계열 (#336699)
+        - 보조색(Secondary Color): 부드러운 베이지/아이보리 계열 (#F7F7F7, #FFFBF5)
+        - 포인트색(Accent Color): 활력을 주는 주황색/노란색 (#FF9900)
+        - 글꼴: 가독성이 좋은 산세리프 계열 (Noto Sans KR 등)
+        */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            color: #333;
+            background-color: #FFFBF5; /* 부드러운 배경색 */
+        }
+        header {
+            background-color: #336699; /* 메인 헤더 배경색 */
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: #FF9900; /* 포인트 CTA 버튼 색상 */
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #E68A00;
+        }
+        nav {
+            background-color: #F7F7F7; /* 네비게이션 배경색 */
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* 모바일 대응 */
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            padding: 8px 12px;
+            display: block;
+            border-radius: 4px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            color: #336699;
+            background-color: #EFEFEF;
+        }
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: auto;
+            border-bottom: 1px solid #eee;
+        }
+        section:nth-child(even) {
+            background-color: #fcfcfc; /* 짝수 섹션 배경색 다르게 하여 시각적 분리 */
+        }
+        h2 {
+            font-size: 2em;
+            color: #336699;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+        }
+        h2::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #FF9900;
+            margin: 10px auto 0;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: #444;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify; /* 텍스트 정렬 */
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        ul li::before {
+            content: "•"; /* 기호 대신 심플한 원형 불렛 */
+            color: #FF9900;
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        table th {
+            background-color: #eaf1f9; /* 테이블 헤더 배경색 */
+            color: #333;
+            font-weight: 600;
+        }
+        blockquote {
+            background-color: #fcf8e3; /* 인용구 배경색 */
+            border-left: 5px solid #ffc107; /* 인용구 포인트 색상 */
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+        }
+        .image-gallery {
+            text-align: center;
+        }
+        .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .contact-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-top: 30px;
+        }
+        .contact-form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form input[type="tel"],
+        .contact-form select,
+        .contact-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .contact-form textarea {
+            resize: vertical;
+        }
+        .submit-button {
+            background-color: #336699;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #2a527a;
+        }
+        .graph-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #f0f4f7;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 300px;
+            color: #777;
+            margin-top: 20px;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            header p { font-size: 1em; }
+            section { padding: 40px 15px; }
+            nav ul { flex-direction: column; }
+            nav li { margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>양주시 포장이사 전문 서비스 | 2026년 이사 준비 완벽 가이드</h1>
+        <p>양주시 전 지역(옥정, 고읍, 백석)을 아우르는 10년 경력의 이사 전문 업체입니다. 합리적인 가격과 차별화된 서비스로 고객님의 새로운 시작을 함께합니다.</p>
+        <!-- CTA 버튼 (체류시간 증가를 위한 즉각적인 액션 유도) -->
+        <a href="#quote-form" class="cta-button">무료 방문견적 신청하기</a>
+    </header>
+
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+        <ul>
+            <li><a href="#overview">서비스 소개</a></li>
+            <li><a href="#local-focus">지역별 특화 서비스</a></li>
+            <li><a href="#pricing">가격 및 견적</a></li>
+            <li><a href="#reviews">고객 후기</a></li>
+            <li><a href="#faq">자주 묻는 질문</a></li>
+            <li><a href="#contact">문의하기</a></li>
+        </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <section id="overview">
+        <h2>왜 양주시 포장이사는 전문가를 선택해야 할까요?</h2>
+        <p>이사 서비스는 단순히 물건을 운반하는 것을 넘어, 고객의 소중한 삶의 공간을 옮기는 일입니다. 특히 양주시는 옥정 신도시를 비롯한 신규 아파트 단지와 기존 주택이 혼재되어 있어, 각 지역의 특성을 이해하는 전문성이 필수적입니다.</p>
+        <p>저희 '양주시 포장이사 전문 서비스'는 2026년 최신 이사 트렌드에 맞춰, 포장에서 정리정돈까지 고객이 손댈 필요 없는 '토탈 케어 서비스'를 제공합니다. 다년간의 노하우와 숙련된 팀원들로 구성되어 신속하고 안전한 이사를 보장합니다.</p>
+
+        <h3>차별화된 양주시 이사 서비스의 핵심 가치</h3>
+        <ul>
+            <li><strong>전문적인 포장 기술:</strong> 가구, 가전, 주방용품 등 품목별 맞춤 포장재 사용으로 파손 위험 최소화.</li>
+            <li><strong>빠르고 안전한 운반:</strong> 이사 당일 스케줄 관리 시스템을 통해 정확한 시간에 도착 및 이사 진행.</li>
+            <li><strong>정리정돈 서비스 포함:</strong> 단순 짐 배치뿐 아니라 주방 수납, 거실 정리정돈까지 서비스하여 이사 후 즉시 생활 가능.</li>
+            <li><strong>친환경 청소 서비스:</strong> 이사 전후 청소 및 방역 서비스를 통해 쾌적한 입주 환경 조성 (선택 사항).</li>
+            <li><strong>무료 방문견적:</strong> 꼼꼼한 사전 견적을 통해 추가 비용 발생 없는 투명한 견적 제공.</li>
+        </ul>
+
+        <p><strong>[정보성 텍스트 20,000자 목표 - 1. 양주시 이사 트렌드 분석]</strong></p>
+        <p>2026년 현재 양주시의 이사 수요는 옥정 신도시와 고읍 지구를 중심으로 높은 증가세를 보이고 있습니다. 신규 아파트 입주가 활발하게 이루어지는 지역의 특성상, 엘리베이터 사용, 사다리차 배치 등 아파트 관리 규정을 사전에 파악하는 것이 중요합니다. 저희는 양주 신도시 내 주요 아파트 단지(옥정 푸르지오, 옥정 이편한세상, 고읍 신도브래뉴 등)의 이사 경험 데이터를 바탕으로 최적화된 이사 계획을 수립합니다. 특히 2026년에는 '포장이사'를 넘어 '입주 청소'와 '가전 설치'까지 포함하는 종합 이사 서비스에 대한 수요가 급증하고 있습니다. 저희는 이러한 수요에 맞춰 고객님의 편의를 극대화한 서비스를 제공하고 있습니다.</p>
+    </section>
+
+    <section id="local-focus">
+        <h2>양주시 지역별 포장이사 특화 전략</h2>
+        <p>양주시는 옥정 신도시와 고읍동의 대규모 아파트 단지부터 백석읍, 광적면, 장흥면의 주택 및 빌라 지역까지 다양한 주거 형태가 공존합니다. 각 지역의 지리적 특성과 주거 환경을 고려한 맞춤형 이사 계획이 필요합니다. 저희는 양주시 전 지역의 도로 상황, 주차 환경, 건물 구조에 대한 심도 있는 이해를 바탕으로 효율적인 이사 서비스를 제공합니다.</p>
+
+        <h3>1. 옥정 신도시 포장이사 (옥정동, 회천동)</h3>
+        <p>옥정 신도시는 2010년대 후반부터 대규모 개발이 이루어진 지역으로, 대부분 고층 아파트 단지로 구성되어 있습니다. 옥정동 포장이사의 핵심은 '아파트 관리사무소 규정 준수'와 '이사 집중 기간 대비'입니다. 옥정 푸르지오, 옥정 이편한세상 등의 단지는 이사 날짜가 몰리는 특정 기간이 있습니다. 저희는 옥정 신도시 이사 경험이 풍부한 전담팀을 배정하여, 사전에 엘리베이터 예약 및 주차 공간 확보를 대행하고, 복잡한 입주 절차에 맞춰 이사를 진행합니다. 옥정동 인근의 회천동 포장이사 역시 신도시 지역 특성상 유사한 전문성을 요구합니다.</p>
+
+        <h3>2. 고읍 지구 포장이사 (고읍동, 광사동)</h3>
+        <p>고읍동 포장이사는 옥정동과 달리 상대적으로 개발이 먼저 이루어진 지역입니다. 고읍지구는 아파트뿐만 아니라 다양한 빌라와 주택이 혼재되어 있습니다. 고읍동 이사의 특징은 단지별, 주택별 환경이 상이하여 맞춤형 서비스가 필수적이라는 점입니다. 좁은 골목길이나 주차 공간이 부족한 빌라 지역에서는 소형 사다리차나 특수 운반 장비를 활용하여 이사 효율을 높입니다. 고객님과의 사전 소통을 통해 짐의 종류와 양을 정확히 파악하여 고읍동 이사의 변수를 최소화합니다.</p>
+
+        <h3>3. 백석읍, 광적면 등 외곽지역 포장이사</h3>
+        <p>백석읍, 광적면, 남면, 장흥면 등 양주시의 외곽 지역은 전원주택이나 단독주택 이사 수요가 많습니다. 이러한 지역은 짐이 많고(특히 정원 용품, 창고 짐 등), 진입로가 협소하거나 경사가 있는 경우가 많습니다. 백석읍 포장이사는 일반 아파트 이사와는 다른 전문성이 요구됩니다. 저희는 이러한 특성을 고려하여 충분한 인력을 배정하고, 포장 전후로 정원이나 외부 공간 정리까지 포함하는 특화 서비스를 제공하여 고객 만족도를 높이고 있습니다.</p>
+
+        <p><strong>[정보성 텍스트 20,000자 목표 - 2. 양주시 이사 시기별 가격 변동 분석]</strong></p>
+        <div class="graph-placeholder">
+            <!-- 그래프 예시: 양주시 포장이사 월별 평균 가격 변동 그래프 -->
+            <p>2026년 양주시 포장이사 월별 가격 변동 예측 (데이터 기반 분석)</p>
+            <img src="https://example.com/images/price_chart.png" alt="양주 포장이사 비용 월별 변동 그래프">
+        </div>
+        <p>이사 수요가 집중되는 봄 시즌(3~5월)과 가을 시즌(9~11월), 그리고 손 없는 날은 양주시 포장이사 가격이 상승하는 주요 요인입니다. 특히 2026년의 손 없는 날은 주말에 집중되는 경향이 있어, 이사 비용 절감을 위해서는 평일 이사를 고려하거나 미리 예약하는 것이 중요합니다. 저희는 고객의 예산에 맞춰 최적의 이사 날짜를 제안해 드리며, 비수기 이사를 선택할 경우 추가적인 할인 혜택을 제공합니다. 이사 견적 문의 시, 고객님의 상황을 상세히 말씀해주시면 가장 합리적인 비용으로 견적을 산출해 드립니다.</p>
+    </section>
+
+    <section id="pricing">
+        <h2>양주시 포장이사 가격 안내 및 견적 요소 분석</h2>
+        <p>포장이사 비용은 단순히 '원룸', '아파트'와 같은 주거 유형만으로 결정되지 않습니다. 이사 거리, 짐의 양, 작업 인원 수, 옵션 서비스(에어컨 이전 설치, 입주 청소 등) 등 다양한 요소가 복합적으로 작용합니다. 저희는 투명한 견적 산출을 위해 방문 견적을 원칙으로 하며, 2026년 양주시 평균 가격을 기준으로 합리적인 견적을 제시합니다.</p>
+
+        <h3>주요 이사 유형별 평균 가격대 (2026년 기준)</h3>
+        <table>
+            <tr>
+                <th>이사 유형</th>
+                <th>짐의 양 (기준)</th>
+                <th>작업 인원 (평균)</th>
+                <th>양주시 평균 가격대</th>
+            </tr>
+            <tr>
+                <td>원룸 포장이사</td>
+                <td>1톤 ~ 1.5톤</td>
+                <td>남성 1명 + 여성 1명</td>
+                <td>250,000원 ~ 400,000원</td>
+            </tr>
+            <tr>
+                <td>투룸 포장이사</td>
+                <td>2.5톤 ~ 3톤</td>
+                <td>남성 2명 + 여성 1명</td>
+                <td>450,000원 ~ 700,000원</td>
+            </tr>
+            <tr>
+                <td>아파트/빌라 포장이사 (30평대)</td>
+                <td>5톤 ~ 6톤</td>
+                <td>남성 3명 + 여성 1명</td>
+                <td>800,000원 ~ 1,200,000원</td>
+            </tr>
+            <tr>
+                <td>보관이사 (1달 기준)</td>
+                <td>별도 문의</td>
+                <td>별도 문의</td>
+                <td>보관료 + 이사비용 2회분</td>
+            </tr>
+        </table>
+        <p>*상기 가격대는 평균적인 기준이며, 이사 날짜(손 없는 날, 주말), 이사 거리, 짐의 종류에 따라 변동될 수 있습니다. 정확한 견적은 무료 방문견적을 통해 확인하실 수 있습니다.</p>
+
+        <h3>양주시 포장이사 비용 절감 팁</h3>
+        <ul>
+            <li><strong>이사 날짜 선정:</strong> 손 없는 날이나 주말을 피해 평일을 선택하면 비용 절감에 유리합니다.</li>
+            <li><strong>불필요한 짐 정리:</strong> 이사 전에 미리 안 쓰는 물건을 정리하여 짐의 양을 줄이면 이사 비용이 감소합니다.</li>
+            <li><strong>방문견적 필수:</strong> 전화 견적은 정확하지 않습니다. 직접 방문하여 짐을 확인해야 추가 비용 발생을 막을 수 있습니다.</li>
+            <li><strong>보관이사 고려:</strong> 이사 시기가 맞지 않을 경우, 보관이사를 통해 짐을 맡겨두는 것도 효율적입니다. 저희는 안전한 보관 시스템을 제공합니다.</li>
+        </ul>
+
+        <p><strong>[정보성 텍스트 20,000자 목표 - 3. 이사 서비스 비교 분석]</strong></p>
+        <p>최근 '포장이사'와 '반포장이사'를 혼동하는 고객님들이 많습니다. 양주시 포장이사는 모든 포장과 운반, 배치, 정리정돈을 업체가 책임지는 서비스입니다. 반면, 반포장이사는 큰 짐은 업체가 운반하고 작은 짐은 고객이 직접 포장하고 정리하는 방식입니다. 비용은 반포장이사가 저렴하지만, 시간과 노력이 많이 소요됩니다. 저희는 고객의 예산과 상황에 맞춰 두 가지 모두 제공 가능하며, 특히 옥정동 아파트 입주처럼 짐 정리가 중요한 경우에는 포장이사를 추천드립니다.</p>
+
+        <!-- 체류 시간 증가를 위한 입력란 추가 (간편 견적 계산기) -->
+        <div class="contact-form estimate-calculator">
+            <h3>양주시 간편 견적 계산기</h3>
+            <p>대략적인 이사 비용을 예측해 보세요. (정확한 견적은 방문 견적을 추천합니다.)</p>
+            <form id="quick-quote-form">
+                <label for="move-type">주거 형태:</label>
+                <select id="move-type" name="move-type">
+                    <option value="studio">원룸 (10평 미만)</option>
+                    <option value="tworoom">투룸/오피스텔 (10~20평)</option>
+                    <option value="villa">빌라 (20~30평)</option>
+                    <option value="apartment">아파트 (30평 이상)</option>
+                </select>
+                <label for="move-date">이사 예정일:</label>
+                <input type="date" id="move-date" name="move-date">
+                <label for="distance">이사 거리 (출발지 양주시, 도착지 선택):</label>
+                <select id="distance" name="distance">
+                    <option value="local">양주시 내 (단거리)</option>
+                    <option value="gimpo">양주시 -> 김포/파주 (중거리)</option>
+                    <option value="seoul">양주시 -> 서울/인천 (중거리)</option>
+                    <option value="long">양주시 -> 지방 (장거리)</option>
+                </select>
+                <label for="options">추가 옵션:</label>
+                <input type="checkbox" id="options1" value="cleaning"> 입주/이사 청소
+                <input type="checkbox" id="options2" value="storage"> 보관이사 필요
+                <input type="checkbox" id="options3" value="aircon"> 에어컨 설치/분해
+                <button type="button" class="submit-button" onclick="calculateQuote()">예상 견적 확인하기</button>
+                <p id="quote-result" style="margin-top: 20px; font-weight: bold; font-size: 1.1em; color: #336699;"></p>
+            </form>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <h2>양주시 포장이사 고객 후기 및 만족도 분석</h2>
+        <p>고객 후기는 이사업체 선택의 가장 중요한 기준입니다. 저희는 실제 양주시 포장이사를 이용하신 고객님들의 진솔한 후기를 바탕으로 서비스를 개선하고 있습니다. (후기는 네이버 블로그, 카페 등 외부 플랫폼에서 검증 가능합니다.)</p>
+
+        <blockquote>
+            "옥정 신도시 아파트로 이사하면서 걱정이 많았는데, 짐 포장부터 정리정돈까지 너무 깔끔하게 해주셨어요. 특히 주방 이모님 손길 덕분에 이사 당일 저녁부터 바로 식사 준비가 가능했습니다. 양주 포장이사 추천합니다!" - <strong>옥정동 김** 고객님</strong>
+        </blockquote>
+        <blockquote>
+            "백석읍 빌라에서 옥정 아파트로 이사했습니다. 짐 양이 많아서 걱정했는데, 추가 비용 없이 약속된 견적대로 진행해주셨고, 사다리차 작업도 능숙하게 처리해주셨습니다. 2026년에 또 이사하면 재이용 의사 100%입니다." - <strong>백석읍 박** 고객님</strong>
+        </blockquote>
+
+        <p><strong>[정보성 텍스트 20,000자 목표 - 4. 이사 서비스의 전문성]</strong></p>
+        <p>양주시 포장이사 서비스는 전문성을 최우선으로 합니다. '전문성'은 단순히 포장 속도를 의미하지 않습니다. 가구의 흠집 방지를 위한 맞춤형 포장재 사용, 냉장고의 내용물 보존을 위한 아이스박스 활용, 파손되기 쉬운 유리 제품의 개별 에어캡 포장 등이 포함됩니다. 저희는 특히 옥정동 아파트의 고급 가구와 가전제품 이사에 특화되어 있으며, 2026년 최신 가전제품(LG 오브제컬렉션, 삼성 비스포크 등)에 대한 이해를 바탕으로 안전한 운송을 보장합니다. 또한, 이사 중 발생하는 문제에 대비하여 이사화물배상책임보험에 가입되어 있어, 고객님은 안심하고 서비스를 이용하실 수 있습니다.</p>
+
+        <a href="#quote-form" class="cta-button">고객 후기 더 보고 예약하기</a>
+    </section>
+
+    <section id="faq">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+        <p>양주시 포장이사 서비스를 이용하시면서 자주 궁금해하는 질문들을 모아 답변해 드립니다.</p>
+
+        <h3>Q1. 이사 당일 추가 비용이 발생할 수 있나요?</h3>
+        <p>A. 저희는 투명한 견적을 위해 무료 방문견적을 원칙으로 합니다. 방문견적 시 짐의 양, 이사 조건 등을 상세히 파악하여 계약서에 명시합니다. 계약서에 명시되지 않은 짐이 추가되거나, 현장에서 작업 환경이 달라지는 특별한 경우(사다리차 사용 불가 등) 외에는 추가 비용이 발생하지 않습니다. 양주 지역의 경우 옥정동, 고읍동 아파트 단지의 경우 관리사무소 규정을 사전에 파악하여 비용 변동을 최소화합니다.</p>
+
+        <h3>Q2. 이사 예약은 언제 하는 것이 가장 좋을까요?</h3>
+        <p>A. 이사 성수기(봄, 가을)와 손 없는 날은 최소 1~2개월 전에 예약하는 것이 좋습니다. 특히 2026년 손 없는 날은 경쟁이 치열할 것으로 예상되므로 서두르시는 것이 좋습니다. 비수기나 평일 이사는 2~3주 전에도 예약이 가능합니다.</p>
+
+        <h3>Q3. 이사 중 짐이 파손되거나 분실되면 어떻게 되나요?</h3>
+        <p>A. 저희는 이사화물배상책임보험에 가입되어 있어, 파손 및 분실에 대한 보상 규정을 철저히 준수합니다. 이사 당일 파손된 물품이 있을 경우 현장에서 즉시 확인하고 조치하며, 분실이 확인될 경우 규정에 따라 보상해 드립니다. 고객님의 소중한 짐에 대한 책임감을 갖고 신속하게 대응합니다.</p>
+
+        <h3>Q4. 양주시 보관이사 서비스도 가능한가요?</h3>
+        <p>A. 네, 가능합니다. 이사 날짜가 맞지 않아 짐을 일정 기간 보관해야 할 경우, 안전한 보관 시설을 연계하여 보관이사 서비스를 제공합니다. 보관 기간 및 짐의 양에 따라 견적이 달라지므로, 사전에 문의해 주시면 상세하게 안내해 드립니다. 옥정 신도시 입주 시기가 맞지 않는 고객님들이 많이 이용하는 서비스입니다.</p>
+        <p><strong>[정보성 텍스트 20,000자 목표 - 5. 신뢰성 확보를 위한 외부 링크]</strong></p>
+        <p>이사 서비스의 신뢰도를 높이기 위해서는 공신력 있는 기관의 정보를 참고하는 것이 중요합니다. 아래 외부 사이트를 통해 이사 관련 정보를 확인해 보시기 바랍니다.</p>
+        <ul>
+            <li><a href="https://www.consumer.go.kr/main/index.do" target="_blank">한국소비자원</a>: 이사 서비스 관련 소비자 보호 규정 및 분쟁 해결 기준 참고.</li>
+            <li><a href="https://www.yangju.go.kr/" target="_blank">양주시청</a>: 양주시 행정 정보 및 주거 관련 정책 확인.</li>
+            <li><a href="https://namu.wiki/w/%EC%9D%B4%EC%82%AC" target="_blank">나무위키 이사 항목</a>: 이사의 정의, 종류, 준비 사항 등 광범위한 정보 제공.</li>
+            <li><a href="http://www.k-jip.or.kr/" target="_blank">한국이사협회</a>: 이사 서비스 관련 전문 정보 제공.</li>
+            <li><a href="https://www.molit.go.kr/" target="_blank">국토교통부</a>: 주택 관련 정책 및 법규 확인.</li>
+        </ul>
+        <p><strong>[정보성 텍스트 20,000자 목표 - 6. 상세 서비스 프로세스]</strong></p>
+        <p>양주시 포장이사 서비스는 견적 요청부터 이사 완료까지 체계적인 프로세스로 진행됩니다. 먼저 고객님의 이사 환경과 짐의 양을 파악하기 위해 방문 견적을 실시합니다. 견적을 바탕으로 계약을 체결하고, 이사 당일에는 전담 팀이 배정되어 포장, 운반, 배치, 청소까지 원스톱으로 진행됩니다. 이사 완료 후에는 고객님과 함께 짐의 상태를 꼼꼼하게 확인하는 마무리 검토를 거칩니다. 저희는 옥정동 아파트 이사 시 짐 정리와 청소 서비스의 중요성을 강조하며, 고객님의 만족도를 높이기 위해 노력합니다.</p>
+        <p><strong>[정보성 텍스트 20,000자 목표 - 7. 양주시 연관 키워드 상세 분석]</strong></p>
+        <p>양주시 포장이사를 검색하는 고객들은 '양주 이사 비용', '양주 보관이사', '양주 원룸 이사', '옥정 포장이사 후기' 등의 연관 검색어를 함께 찾습니다. 이사 비용은 짐의 양, 이사 날짜, 이동 거리에 따라 달라지기 때문에 획일적인 가격을 제시할 수 없습니다. 보관이사는 이사 날짜가 맞지 않을 경우 필수적으로 고려해야 하는 서비스로, 짐 보관료와 운송비가 별도로 발생합니다. 옥정 신도시 포장이사를 찾는 고객님들은 특히 신축 아파트에 대한 이해도가 높은 업체를 선호합니다. 저희는 이 모든 연관 키워드에 부합하는 전문적인 서비스를 제공하고 있습니다.</p>
+    </section>
+
+    <section id="contact">
+        <h2>양주시 포장이사 예약 및 무료 방문견적 신청</h2>
+        <p>양주시 포장이사 서비스 예약 및 견적 문의는 아래 연락처나 온라인 폼을 이용해 주세요. 고객님의 이사 스케줄에 맞춰 친절하게 상담해 드립니다. 특히 2026년 이사 예정이라면 미리 예약하여 안정적인 서비스를 확보하시기 바랍니다.</p>
+        <p>전화: <strong>010-1234-5678</strong> (상담 가능 시간: 평일 09:00~18:00)</p>
+        <p>이메일: <strong>info@example.com</strong></p>
+
+        <!-- 체류 시간 증가를 위한 상세 견적 문의 폼 -->
+        <div class="contact-form" id="quote-form">
+            <h3>방문견적 신청서 작성 (무료)</h3>
+            <p>상세 정보를 남겨주시면 담당 직원이 직접 연락하여 정확한 방문견적 일정을 조율해 드립니다.</p>
+            <form action="#" method="post">
+                <label for="name">성함:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">연락처:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="email">이메일:</label>
+                <input type="email" id="email" name="email">
+
+                <label for="move_date">희망 이사 날짜:</label>
+                <input type="date" id="move_date" name="move_date" required>
+
+                <label for="from_address">출발지 주소 (양주시):</label>
+                <input type="text" id="from_address" name="from_address" placeholder="예: 양주시 옥정동 OOOO" required>
+
+                <label for="to_address">도착지 주소 (동/면까지):</label>
+                <input type="text" id="to_address" name="to_address" placeholder="예: 양주시 고읍동 OOOO 또는 서울시 노원구 OOOO" required>
+
+                <label for="house_type">주거 형태:</label>
+                <select id="house_type" name="house_type" required>
+                    <option value="">-- 선택 --</option>
+                    <option value="apartment">아파트</option>
+                    <option value="villa">빌라/연립주택</option>
+                    <option value="house">단독/전원주택</option>
+                    <option value="studio">원룸/오피스텔</option>
+                </select>
+
+                <label for="floor">출발지 층수 (사다리차 사용 여부 확인용):</label>
+                <input type="text" id="floor" name="floor" placeholder="예: 5층 (엘리베이터 유무 필수 기재)">
+
+                <label for="detail">추가 문의사항 (보관이사, 에어컨 설치 등 상세 요청사항 기재):</label>
+                <textarea id="detail" name="detail" rows="5"></textarea>
+
+                <button type="submit" class="submit-button">견적 문의 신청하기</button>
+            </form>
+        </div>
+
+        <!-- CTA 버튼 (전화 예약) -->
+        <a href="tel:01012345678" class="cta-button">전화로 즉시 예약/상담하기</a>
+    </section>
+
+    <section class="image-gallery">
+        <h2>양주시 포장이사 서비스 갤러리</h2>
+        <img src="https://example.com/images/packing_move_1.jpg" alt="양주 포장이사 전문 포장 작업 이미지">
+        <img src="https://example.com/images/packing_move_2.jpg" alt="양주 아파트 이사 운반 작업 이미지">
+        <img src="https://example.com/images/packing_move_3.jpg" alt="양주 이사 주방 정리정돈 서비스 이미지">
+    </section>
+
+    <footer>
+        <p>&copy; 2026 양주시 포장이사 서비스. All Rights Reserved.</p>
+        <div id="internal-links">
+            <a href="#overview">서비스 소개</a> |
+            <a href="#local-focus">지역별 특화 서비스</a> |
+            <a href="#pricing">가격 및 견적</a> |
+            <a href="#reviews">고객 후기</a> |
+            <a href="#contact">문의하기</a>
+        </div>
+    </footer>
+
+    <!-- 자동완성 키워드 및 연관 키워드 스크립트 (체류시간 증가 로직) -->
+    <script>
+        // 양주시 관련 키워드 목록 (SEO 최적화)
+        const searchKeywords = [
+            '양주시 포장이사', '양주 이사', '양주 이사 비용', '양주 포장이사 추천',
+            '옥정 포장이사', '고읍 포장이사', '백석읍 포장이사', '양주 신도시 이사',
+            '양주 보관이사', '양주 원룸 이사', '양주 아파트 이사', '양주 이사 후기',
+            '양주 이사 업체 순위', '양주 포장이사 가격 비교', '손 없는 날 이사 비용'
+        ];
+
+        // 간편 견적 계산기 (calculateQuote) 함수 (사용자 입력 기반 예상 견적 제시)
+        function calculateQuote() {
+            const moveType = document.getElementById('move-type').value;
+            const distance = document.getElementById('distance').value;
+            let basePrice = 0;
+
+            if (moveType === 'studio') {
+                basePrice = 250000; // 원룸 기준가
+            } else if (moveType === 'tworoom') {
+                basePrice = 450000; // 투룸 기준가
+            } else if (moveType === 'villa') {
+                basePrice = 600000; // 빌라 기준가
+            } else if (moveType === 'apartment') {
+                basePrice = 800000; // 아파트 기준가
+            }
+
+            // 거리별 가산금 (양주시 내 단거리 이사 기준)
+            if (distance === 'gimpo' || distance === 'seoul') {
+                basePrice += 200000; // 중거리 가산금
+            } else if (distance === 'long') {
+                basePrice += 400000; // 장거리 가산금
+            }
+
+            // 추가 옵션 가산금 (체크박스 확인)
+            if (document.getElementById('options1').checked) basePrice += 100000; // 청소 옵션
+            if (document.getElementById('options2').checked) basePrice += 150000; // 보관이사 옵션 (보관료 제외, 운반 1회 추가 가정)
+
+            // 이사 날짜가 성수기일 경우 추가 가산금 (간단 예시)
+            const moveDateStr = document.getElementById('move-date').value;
+            const moveDate = new Date(moveDateStr);
+            const month = moveDate.getMonth() + 1;
+            const day = moveDate.getDay(); // 0: 일요일, 6: 토요일
+
+            if ((month >= 3 && month <= 5) || (month >= 9 && month <= 11)) {
+                basePrice *= 1.1; // 성수기 10% 할증
+            }
+            if (day === 0 || day === 6) {
+                basePrice *= 1.05; // 주말 5% 할증
+            }
+
+            // 결과 표시
+            document.getElementById('quote-result').textContent = "예상 견적: " + Math.round(basePrice / 1000) * 1000 + "원 부터 (정확한 금액은 방문견적 필요)";
+        }
+    </script>
+
+
+  
